@@ -11,7 +11,8 @@ set (CMAKE_CXX_STANDARD 20)
 add_executable(${PROJECT_NAME} 
 src/main.cpp
 server/session.hpp
-server/server.hpp)
+server/server.hpp
+server/classTest.hpp)
 
 #NOTE include Ws2_32.lib wsock32
 if(WIN32)
