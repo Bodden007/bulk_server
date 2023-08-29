@@ -18,7 +18,7 @@ public:
 
         acceptor.async_accept(*socket, [&](boost::system::error_code error)
                               {
-            std::make_shared<session>(io_context,std::move(*socket))->start();
+            std::make_shared<session>(io_context,std::move(*socket))->startReading();
             async_accept(); });
     }
 
