@@ -10,9 +10,13 @@ set (CMAKE_CXX_STANDARD 20)
 
 add_executable(${PROJECT_NAME} 
 src/main.cpp
+src/controlsData.cpp
+src/models/dataTime.cpp
+src/models/outConsole.cpp
+src/models/procesData.cpp
+src/models/writeFile.cpp
 server/session.hpp
-server/server.hpp
-server/classTest.hpp)
+server/server.hpp)
 
 #NOTE include Ws2_32.lib wsock32
 if(WIN32)

@@ -4,19 +4,22 @@
 #include <thread>
 #include "boost/asio.hpp"
 #include <boost/algorithm/string/trim_all.hpp>
-#include "classTest.hpp"
+#include "../src/includes/controlsData.hpp"
+#include "../src/includes/procesData.hpp"
 
 class session : public std::enable_shared_from_this<session>
 {
-    // FIXME Class control to need create
-    //  classTest clTest;
 
 public:
-    session(boost::asio::io_context &io_context,
+    // FIXME Added int inN
+    session(int inN, boost::asio::io_context &io_context,
             boost::asio::ip::tcp::socket &&socket) : io_context(io_context),
                                                      socket(std::move(socket))
     {
+        N = inN;
     }
+    procesData procData;
+
     // TODO Need to will off io_context
     void startReading()
     {
@@ -50,6 +53,8 @@ public:
         if (val.compare("all") == 0)
         {
             std::cout << "Vector size:  " << vec.size() << std::endl;
+            // FIXME Added N
+            std::cout << "Size N: " << N << std::endl;
             for (auto v : vec)
             {
                 std::cout << "Vector: " << v << std::endl;
@@ -81,11 +86,14 @@ private:
         std::string name{boost::asio::buffer_cast<const char *>(streambuf.data()),
                          length};
         boost::trim(name);
-        std::cout << "Test: " << name << std::endl;
+        // std::cout << "N: " << N << std::endl;
+        // std::cout << "Test: " << name << std::endl;
 
-        connect(name);
+        procData.sortData(name, N);
     }
 
+    // FIXME Added int N
+    int N;
     boost::asio::io_context &io_context;
     boost::asio::ip::tcp::socket socket;
     boost::asio::streambuf streambuf;
